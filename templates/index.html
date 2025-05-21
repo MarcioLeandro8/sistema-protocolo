@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Protocolo Interno</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sistema de Protocolo Interno</h1>
+
+        <form action="/adicionar" method="post" class="formulario">
+            <input type="text" name="numero" placeholder="Número do Protocolo" required>
+            <input type="text" name="setor" placeholder="Setor" required>
+            <input type="text" name="assunto" placeholder="Assunto" required>
+            <input type="date" name="data" required>
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Setor</th>
+                    <th>Assunto</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for protocolo in protocolos %}
+                <tr>
+                    <td>{{ protocolo[1] }}</td>
+                    <td>{{ protocolo[2] }}</td>
+                    <td>{{ protocolo[3] }}</td>
+                    <td>{{ protocolo[4] }}</td>
+                    <td>
+                        <form action="/excluir/{{ protocolo[0] }}" method="post" style="display:inline;">
+                            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este protocolo?')">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
